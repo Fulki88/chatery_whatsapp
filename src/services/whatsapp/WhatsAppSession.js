@@ -290,7 +290,8 @@ class WhatsAppSession {
         this.socket.ev.on('messages.upsert', async (m) => {
             const message = m.messages[0];
             if (!message.key.fromMe && m.type === 'notify') {
-                console.log(`📩 [${this.sessionId}] New message from:`, message.key.remoteJid);
+                console.log(`📩 [${this.sessionId}] New message from:`, message.key.remoteJidAlt);
+                // console.log(JSON.stringify(message, null, 2));
                 
                 // Auto-save media if present
                 await this._autoSaveMedia(message);

@@ -10,7 +10,7 @@ class MessageFormatter {
      */
     static formatMessage(msg) {
         if (!msg || !msg.message) return null;
-
+        
         const messageContent = msg.message;
         let type = 'unknown';
         let content = null;
@@ -78,7 +78,7 @@ class MessageFormatter {
             chatId: msg.key.remoteJid,
             fromMe: msg.key.fromMe || false,
             sender: msg.key.participant || msg.key.remoteJid,
-            senderPhone: (msg.key.participant || msg.key.remoteJid)?.split('@')[0],
+            senderPhone: (msg.key.remoteJidAlt || msg.key.remoteJid)?.split('@')[0],
             senderName: msg.pushName || null,
             timestamp: typeof msg.messageTimestamp === 'object' 
                 ? msg.messageTimestamp.low 
