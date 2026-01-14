@@ -1196,7 +1196,7 @@
  *       
  *       ### Connection
  *       ```javascript
- *       const socket = io('ws://your-server:3000');
+ *       const socket = io('ws://your-server:3002');
  *       ```
  *       
  *       ### Subscribe to Session Events

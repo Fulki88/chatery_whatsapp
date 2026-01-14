@@ -23,7 +23,7 @@ class BaileysStore {
     // Cache timestamps
     this.lastOverviewUpdate = 0;
     this.lastContactsUpdate = 0;
-    this.cacheTimeout = 30000; // 30 seconds cache validity
+    this.cacheTimeout = 30020; // 30 seconds cache validity
   }
 
   /**

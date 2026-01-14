@@ -37,11 +37,11 @@ RUN mkdir -p /app/sessions /app/public/media /app/store && \
 USER chatery
 
 # Expose port
-EXPOSE 3000
+EXPOSE 3002
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
+    CMD wget --no-verbose --tries=1 --spider http://localhost:3002/ || exit 1
 
 # Start the application
 CMD ["node", "index.js"]

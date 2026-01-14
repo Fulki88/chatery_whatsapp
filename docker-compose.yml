@@ -8,10 +8,10 @@ services:
     container_name: chatery-whatsapp-api
     restart: unless-stopped
     ports:
-      - "${PORT:-3000}:3000"
+      - "${PORT:-3002}:3002"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3002
       - CORS_ORIGIN=${CORS_ORIGIN:-*}
       - DASHBOARD_USERNAME=${DASHBOARD_USERNAME:-admin}
       - DASHBOARD_PASSWORD=${DASHBOARD_PASSWORD:-admin123}
@@ -24,7 +24,7 @@ services:
       # Persist message store
       - chatery_store:/app/store
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3002/"]
       interval: 30s
       timeout: 10s
       retries: 3

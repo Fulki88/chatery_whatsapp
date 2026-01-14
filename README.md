@@ -116,7 +116,7 @@ The following data is persisted across container restarts:
 Create a `.env` file in the root directory:
 
 ```env
-PORT=3000
+PORT=3002
 CORS_ORIGIN=*
 
 # Dashboard Authentication
@@ -140,7 +140,7 @@ All WhatsApp API endpoints are protected with API key authentication. Include th
 
 2. Include the header in all API requests:
    ```bash
-   curl -X GET http://localhost:3000/api/whatsapp/sessions \
+   curl -X GET http://localhost:3002/api/whatsapp/sessions \
      -H "X-Api-Key: your_super_secret_key_12345"
    ```
 
@@ -173,20 +173,20 @@ When logging into the dashboard, you'll be prompted to enter your API key (optio
 
 2. **Create a session**
    ```bash
-   curl -X POST http://localhost:3000/api/whatsapp/sessions/mysession/connect \
+   curl -X POST http://localhost:3002/api/whatsapp/sessions/mysession/connect \
      -H "X-Api-Key: your_api_key" \
      -H "Content-Type: application/json"
    ```
 
 3. **Get QR Code** - Open in browser or scan
    ```
-   http://localhost:3000/api/whatsapp/sessions/mysession/qr/image
+   http://localhost:3002/api/whatsapp/sessions/mysession/qr/image
    ```
    Note: QR image endpoint also requires API key. Use curl or include header.
 
 4. **Send a message**
    ```bash
-   curl -X POST http://localhost:3000/api/whatsapp/chats/send-text \
+   curl -X POST http://localhost:3002/api/whatsapp/chats/send-text \
      -H "X-Api-Key: your_api_key" \
      -H "Content-Type: application/json" \
      -d '{"sessionId": "mysession", "chatId": "628123456789", "message": "Hello!"}'
@@ -196,7 +196,7 @@ When logging into the dashboard, you'll be prompted to enter your API key (optio
 
 ## 🎛️ Dashboard
 
-Access the admin dashboard at `http://localhost:3000/dashboard`
+Access the admin dashboard at `http://localhost:3002/dashboard`
 
 ### 🔐 Authentication
 
@@ -233,7 +233,7 @@ The dashboard provides a modern dark-themed interface:
 
 ## 📚 API Documentation
 
-Base URL: `http://localhost:3000/api/whatsapp`
+Base URL: `http://localhost:3002/api/whatsapp`
 
 ### Sessions
 
@@ -931,14 +931,14 @@ POST /groups/revoke-invite
 
 ## 🔌 WebSocket Events
 
-Connect to WebSocket server at `ws://localhost:3000`
+Connect to WebSocket server at `ws://localhost:3002`
 
 ### Connection
 
 ```javascript
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:3002');
 
 // Subscribe to a session
 socket.emit('subscribe', 'mysession');
@@ -972,7 +972,7 @@ socket.emit('unsubscribe', 'mysession');
 ### Example: Listen for Messages
 
 ```javascript
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:3002');
 
 socket.on('connect', () => {
   console.log('Connected to WebSocket');
@@ -1008,7 +1008,7 @@ socket.on('connection.update', (data) => {
 
 ### WebSocket Test Page
 
-Open `http://localhost:3000/ws-test` in your browser for an interactive WebSocket testing interface.
+Open `http://localhost:3002/ws-test` in your browser for an interactive WebSocket testing interface.
 
 ---
 
@@ -1022,7 +1022,7 @@ Set webhooks when creating or updating a session:
 
 ```bash
 # When creating session with multiple webhooks
-curl -X POST http://localhost:3000/api/whatsapp/sessions/mysession/connect \
+curl -X POST http://localhost:3002/api/whatsapp/sessions/mysession/connect \
   -H "Content-Type: application/json" \
   -d '{
     "metadata": { "userId": "123" },
@@ -1034,7 +1034,7 @@ curl -X POST http://localhost:3000/api/whatsapp/sessions/mysession/connect \
   }'
 
 # Add a webhook to existing session
-curl -X POST http://localhost:3000/api/whatsapp/sessions/mysession/webhooks \
+curl -X POST http://localhost:3002/api/whatsapp/sessions/mysession/webhooks \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://new-webhook.com/endpoint",
@@ -1042,14 +1042,14 @@ curl -X POST http://localhost:3000/api/whatsapp/sessions/mysession/webhooks \
   }'
 
 # Remove a webhook
-curl -X DELETE http://localhost:3000/api/whatsapp/sessions/mysession/webhooks \
+curl -X DELETE http://localhost:3002/api/whatsapp/sessions/mysession/webhooks \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://new-webhook.com/endpoint"
   }'
 
 # Update all webhooks
-curl -X PATCH http://localhost:3000/api/whatsapp/sessions/mysession/config \
+curl -X PATCH http://localhost:3002/api/whatsapp/sessions/mysession/config \
   -H "Content-Type: application/json" \
   -d '{
     "webhooks": [
@@ -1162,7 +1162,7 @@ chatery_backend/
 ```javascript
 const axios = require('axios');
 
-const API_URL = 'http://localhost:3000/api/whatsapp';
+const API_URL = 'http://localhost:3002/api/whatsapp';
 
 // Create session
 async function createSession(sessionId) {
@@ -1192,7 +1192,7 @@ async function getGroups(sessionId) {
 ```python
 import requests
 
-API_URL = 'http://localhost:3000/api/whatsapp'
+API_URL = 'http://localhost:3002/api/whatsapp'
 
 # Create session
 def create_session(session_id):
@@ -1283,11 +1283,11 @@ Your support helps me maintain and improve this project! ❤️
 
 | Resource | URL |
 |----------|-----|
-| 🎛️ Dashboard | http://localhost:3000/dashboard |
-| 📚 API Base URL | http://localhost:3000/api/whatsapp |
-| 🔌 WebSocket Test | http://localhost:3000/ws-test |
-| 📊 WebSocket Stats | http://localhost:3000/api/websocket/stats |
-| ❤️ Health Check | http://localhost:3000/api/health |
+| 🎛️ Dashboard | http://localhost:3002/dashboard |
+| 📚 API Base URL | http://localhost:3002/api/whatsapp |
+| 🔌 WebSocket Test | http://localhost:3002/ws-test |
+| 📊 WebSocket Stats | http://localhost:3002/api/websocket/stats |
+| ❤️ Health Check | http://localhost:3002/api/health |
 
 ---
 
