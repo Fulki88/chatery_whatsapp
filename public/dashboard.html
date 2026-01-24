@@ -834,6 +834,7 @@
                                     <option value="POST|/api/whatsapp/chats/send-location">POST /chats/send-location - Send location</option>
                                     <option value="POST|/api/whatsapp/chats/send-contact">POST /chats/send-contact - Send contact</option>
                                     <option value="POST|/api/whatsapp/chats/send-button">POST /chats/send-button - Send button message</option>
+                                    <option value="POST|/api/whatsapp/chats/send-poll">POST /chats/send-poll - Send poll message</option>
                                     <option value="POST|/api/whatsapp/chats/presence">POST /chats/presence - Send typing indicator</option>
                                     <option value="POST|/api/whatsapp/chats/check-number">POST /chats/check-number - Check number exists</option>
                                     <option value="POST|/api/whatsapp/chats/profile-picture">POST /chats/profile-picture - Get profile picture</option>
@@ -1649,6 +1650,16 @@
                     typingTime: 0
                 };
                 helpText = '🔘 <code>buttons</code>: Max 3 buttons. <code>typingTime</code>: Typing duration in ms.';
+            } else if (path.includes('/chats/send-poll')) {
+                body = { 
+                    sessionId: '', 
+                    chatId: '628123456789', 
+                    question: 'What\'s your favorite programming language?',
+                    options: ['JavaScript', 'Python', 'Go', 'Rust'],
+                    multipleAnswers: false,
+                    typingTime: 0
+                };
+                helpText = '📊 <code>question</code>: Poll question. <code>options</code>: Min 2 options (array). <code>multipleAnswers</code>: Allow multiple selections (boolean). <code>typingTime</code>: Typing duration in ms.';
             } else if (path.includes('/chats/presence')) {
                 body = { 
                     sessionId: '', 
