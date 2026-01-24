@@ -712,6 +712,45 @@ class WhatsAppSession {
         }
     }
 
+    async sendPoll(chatId, question, options, multipleAnswers = false, typingTime = 0) {
+        try {
+            if (!this.socket || this.connectionStatus !== 'connected') {
+                return {
+                    success: false,
+                    message: 'Session not connected. Please scan QR code first.'
+                };
+            }
+
+            const jid = this.formatChatId(chatId);
+            
+            // Simulate typing if requested
+            await this._simulateTyping(jid, typingTime);
+            
+            const result = await this.socket.sendMessage(jid, {
+                poll: {
+                    name: question,
+                    values: options,
+                    selectableCount: multipleAnswers ? options.length : 1
+                }
+            });
+
+            return {
+                success: true,
+                message: 'Poll sent successfully',
+                data: {
+                    messageId: result.key.id,
+                    chatId: jid,
+                    timestamp: new Date().toISOString()
+                }
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
+    }
+
     // ==================== CONTACT & PROFILE ====================
 
     async isRegistered(phone) {

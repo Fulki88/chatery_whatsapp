@@ -464,6 +464,28 @@ router.post('/chats/send-button', checkSession, async (req, res) => {
     }
 });
 
+// Send poll message
+router.post('/chats/send-poll', checkSession, async (req, res) => {
+    try {
+        const { chatId, question, options, multipleAnswers = false, typingTime = 0 } = req.body;
+        
+        if (!chatId || !question || !Array.isArray(options) || options.length < 2) {
+            return res.status(400).json({
+                success: false,
+                message: 'Missing required fields: chatId, question, options (min 2 items)'
+            });
+        }
+
+        const result = await req.session.sendPoll(chatId, question, options, multipleAnswers, typingTime);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+});
+
 // Send presence update (typing indicator)
 router.post('/chats/presence', checkSession, async (req, res) => {
     try {

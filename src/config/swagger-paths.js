@@ -521,6 +521,64 @@
 
 /**
  * @swagger
+ * /api/whatsapp/chats/send-poll:
+ *   post:
+ *     tags: [Messaging]
+ *     summary: Send poll message
+ *     description: Send a poll message with multiple choice options
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [sessionId, chatId, question, options]
+ *             properties:
+ *               sessionId:
+ *                 type: string
+ *                 example: mysession
+ *               chatId:
+ *                 type: string
+ *                 example: "628123456789"
+ *                 description: Phone number or group JID
+ *               question:
+ *                 type: string
+ *                 example: "What's your favorite color?"
+ *               options:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 minItems: 2
+ *                 example: ["Red", "Blue", "Green", "Yellow"]
+ *               multipleAnswers:
+ *                 type: boolean
+ *                 example: false
+ *                 description: Allow multiple selections
+ *               typingTime:
+ *                 type: integer
+ *                 example: 2000
+ *                 description: Typing indicator duration (ms)
+ *     responses:
+ *       200:
+ *         description: Poll sent successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ *       400:
+ *         description: Invalid request data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       404:
+ *         description: Session not found
+ *       500:
+ *         description: Server error
+ */
+
+/**
+ * @swagger
  * /api/whatsapp/chats/presence:
  *   post:
  *     tags: [Messaging]
